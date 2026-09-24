@@ -1,7 +1,7 @@
 //your JS code here. If required.
 const output = document.getElementById("output");
 
-// Show Loading initially
+// Show loading row initially
 output.innerHTML = `
 
   <tr>
@@ -9,10 +9,9 @@ output.innerHTML = `
   </tr>
 `;
 
-// Function to create a promise
+// Create a promise with random delay between 1 and 3 seconds
 function createPromise() {
 return new Promise((resolve) => {
-// Random time between 1 and 3 seconds
 const delay = Math.floor(Math.random() * 3) + 1;
 
 ```
@@ -24,9 +23,6 @@ setTimeout(() => {
 });
 }
 
-// Start timer for total time
-const startTime = performance.now();
-
 // Create 3 promises
 const promise1 = createPromise();
 const promise2 = createPromise();
@@ -35,14 +31,15 @@ const promise3 = createPromise();
 // Wait for all promises
 Promise.all([promise1, promise2, promise3])
 .then((results) => {
-// Calculate total time
-const totalTime = (performance.now() - startTime) / 1000;
 
 ```
 // Remove Loading row
 output.innerHTML = "";
 
-// Add Promise 1
+// Calculate total as maximum time
+const total = Math.max(...results);
+
+// Promise 1
 output.innerHTML += `
   <tr>
     <td>Promise 1</td>
@@ -50,7 +47,7 @@ output.innerHTML += `
   </tr>
 `;
 
-// Add Promise 2
+// Promise 2
 output.innerHTML += `
   <tr>
     <td>Promise 2</td>
@@ -58,7 +55,7 @@ output.innerHTML += `
   </tr>
 `;
 
-// Add Promise 3
+// Promise 3
 output.innerHTML += `
   <tr>
     <td>Promise 3</td>
@@ -66,11 +63,11 @@ output.innerHTML += `
   </tr>
 `;
 
-// Add Total
+// Total
 output.innerHTML += `
   <tr>
     <td><strong>Total</strong></td>
-    <td><strong>${totalTime.toFixed(3)}</strong></td>
+    <td><strong>${total.toFixed(3)}</strong></td>
   </tr>
 `;
 ```
